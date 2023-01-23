@@ -65,7 +65,7 @@ $(function () {
   });
 
   var displayDateEl = $('<p>');
-  displayDateEl.text("Today's date is " + dayjs().format("MMMM DD YYYY") + " and the time is now " + dayjs().format("HH:mm A"));
+  displayDateEl.text("Today's date is " + dayjs().format("MMMM DD, YYYY") + " and the time is now " + dayjs().format("HH:mm A"));
   
   currentDay.append(displayDateEl);
 });
