@@ -11,6 +11,8 @@ $(function () {
     for (var i = firstWorkHour; i < lastWorkHour + 1; i++ ) {
       var iterative = "hour-" + i;
       var savedTextBox = localStorage.getItem(iterative);
+      
+      // Using find() to target class of .description as that is the element for the textarea
       $("#" + iterative).find('.description').val(savedTextBox);
     }
   })
