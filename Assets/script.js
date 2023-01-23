@@ -55,7 +55,6 @@ $(function () {
 
   // Going through the hour container using the class saveBtn selector
   hourContainer.on('click', '.saveBtn', function () {
-
     // Using closest() to find the first ancestor element to the .saveBtn class and then using find() to find the closest descendant of the respective class .time-block
     //Using the variable 'description' defined in the beginning of the code does not work in the find() method in this case because the variable is a collection of all elements of the class .description
     var textBox = $(this).closest('.time-block').find('.description').val();
