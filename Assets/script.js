@@ -19,40 +19,36 @@ $(function () {
 
   // On window load, display the stored localStorage value in the textboxes
   $(window).on("load", function () {
-    var savedTextBox = localStorage.getItem('text');
-    description.val(savedTextBox);
+    for (var i = 9; i < 17; i++ ) {
+      var iterative = "hour-" + i;
+      console.log(iterative);
+      var savedTextBox = localStorage.getItem(iterative);
+      $("#" + iterative).find('.description').val(savedTextBox);
+    }
   })
+
+
   
-  // work on this function:: we need to set the key in localstorage.setitem to a parameter that takes in hour-[i] to represent the times from 9-1700
-  saveBtn.on('click', function () {
-    var textBox = $(this).closest('.time-block').find('.description').val();
-    localStorage.setItem('text', textBox);
-  });
-  
-  
-
-
-
-  // cloning the div until 5pm.. wrap this all in an if statement that says if time === 12pm don't subtract 12 from iterative. If > 12pm, substract 12 from iterative to get the time in 12 hour format instead of 24 hour format
-  var cloneDIV = $("#hour-11").clone();
-  cloneDIV.attr('id', 'hour-' + 12);
-  cloneDIV.find('.hour').text("12PM");
-  hourContainer.append(cloneDIV);
-
-  // figure out a way not to use static numbers
-  for (let i = 13; i < 18; i++) {
+  // Function takes two parameters to append 12pm - 5pm times onto the HTML.
+  function clonedHours(startHour, endHour) {
+    for (let i = startHour; i <= endHour; i++) {
+    
+    // Cloning the last time block in the HTML so we can add i to the id.
     var cloneDIV = $("#hour-11").clone();
     cloneDIV.attr('id', 'hour-' + (i));
-    cloneDIV.find('.hour').text(i - 12 + "PM");
-    hourContainer.append(cloneDIV);
-  }
 
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  // - APPLY AN IF STATEMENT, IF THE ITERATIVE HOUR === HH, THEN SET IT TO PRESENT. IF THE ITERATIVE HOUR < HH, SET TO PAST. IF > HH, SET TO FUTURE
+    // Using the .find() method to target the div responsible for displaying the text of the hour
+    if(cloneDIV.attr('id') === 'hour-12') {
+      cloneDIV.find('.hour').text("12PM");
+    } else {
+    
+    // We subtract 12 here in order to make it a 12 hour time schedule 
+    cloneDIV.find('.hour').text(i - 12 + "PM");
+    }
+    hourContainer.append(cloneDIV);
+    }
+  }
+  clonedHours(12, 17);
 
   $("div[id^='hour-']").each(function() {
 
@@ -71,16 +67,21 @@ $(function () {
 
     if (dayjs().get('hour') < hourEl) {
       $(this).addClass('future')
-      console.log(hourEl);
+      
     }
 
   
   });
 
 
- 
-
-
+  // Going through the hour container using the class saveBtn selector
+  hourContainer.on('click', '.saveBtn', function () {
+    var textBox = $(this).closest('.time-block').find('.description').val();
+    var hourId = $(this).closest('.time-block').attr('id');
+    localStorage.setItem(hourId, textBox)
+    console.log(textBox);
+    console.log(hourId);
+  });
 
   
   // TODO: Add code to get any user input that was saved in localStorage and set
@@ -95,8 +96,3 @@ $(function () {
 
   
 });
-
-
-// - Implement a function that saves the information entered in the textbox on click on the save button to localstorage. use localstorage at page start to get any previous stored info
-// - Use date/time picker type function from jquery/day.js. 
-//   - implement a function that if a specified time is hit, it changes color to represent past, present, future. 
