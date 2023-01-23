@@ -10,3 +10,7 @@ APIs used:
 * jQuery
 * DayJS
 
+
+Here is a gif preview of the application:
+
+![gif showcasing how the application works](./Assets/images/screen-capture.gif)
