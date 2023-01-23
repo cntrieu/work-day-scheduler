@@ -42,14 +42,11 @@ $(function () {
     var currentId = $(this).attr("id"); // get the id of the current element using attr()
     var hourEl = currentId.split("-")[1]; // splitting the hour id and taking the numeric value only
  
-    // Using dayjs to get the current hour and comparing to the hourEl.
-    if (dayjs().get('hour') == hourEl ) {
-      $(this).addClass('present')
-    } else if (dayjs().get('hour') > hourEl) {
-      $(this).addClass('past')
-    } else {
-      $(this).addClass('future')
-    }
+    // Using dayjs to get the current hour and comparing to the hourEl. Replaced the if/else statement here previously with a ternary operator conditional chain
+    return (dayjs().get('hour') == hourEl ) ? $(this).addClass('present') 
+    : (dayjs().get('hour') > hourEl) ? $(this).addClass('past') 
+    : $(this).addClass('future')
+
   });
 
   // Going through the hour container using the class saveBtn selector
