@@ -16,7 +16,7 @@ $(function () {
 
   // Function takes two parameters to append 12pm - 5pm times onto the HTML.
   var clonedHours = function(startHour, endHour) {
-    for (let i = startHour; i <= endHour; i++) {
+    for (var i = startHour; i <= endHour; i++) {
     
     // Cloning the last time block in the HTML so we can add i to the id.
     var cloneDIV = $("#hour-11").clone();
