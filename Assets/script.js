@@ -8,7 +8,7 @@ var lastWorkHour = 17;
 $(function () {
   // On window load, display the stored localStorage value in the textboxes of the respective hour
   $(window).on("load", function () {
-    for (var i = firstWorkHour; i < lastWorkHour; i++ ) {
+    for (var i = firstWorkHour; i < lastWorkHour + 1; i++ ) {
       var iterative = "hour-" + i;
       var savedTextBox = localStorage.getItem(iterative);
       $("#" + iterative).find('.description').val(savedTextBox);
